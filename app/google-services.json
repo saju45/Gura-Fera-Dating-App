@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "838562303641",
+    "firebase_url": "https://gura-fera-default-rtdb.firebaseio.com",
+    "project_id": "gura-fera",
+    "storage_bucket": "gura-fera.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838562303641:android:e48cc4dc5fd1f4c3847208",
+        "android_client_info": {
+          "package_name": "com.example.tindertest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838562303641-ss9o1vn940dli1dhklcndfkfghcm7sev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIAH-st3fD6BhZz23MuT7cFF5ZKHmd2C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838562303641-ss9o1vn940dli1dhklcndfkfghcm7sev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

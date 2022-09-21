@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:id="@+id/layoutParse"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/prfileAmin3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/circle_img"
+        android:layout_width="170dp"
+        android:layout_height="170dp"/>
+
+    <ImageView
+        android:id="@+id/prfileAmin2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/circle_img"
+        android:layout_width="170dp"
+        android:layout_height="170dp"/>
+
+
+
+
+    <ImageView
+        android:src="@drawable/circle_img"
+        android:id="@+id/profileAmin1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="170dp"
+        android:layout_height="170dp"/>
+
+
+
+    <ImageView
+        android:id="@+id/profileImg"
+        android:src="@drawable/monkey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="170dp"
+        android:layout_height="170dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
