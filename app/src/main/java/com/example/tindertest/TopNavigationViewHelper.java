@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 
 import com.example.tindertest.Chat.ChatActivity;
+import com.example.tindertest.Home.HomeActivity;
 import com.example.tindertest.Main.MainActivity;
 import com.example.tindertest.Matches.Matched_Activity;
 import com.example.tindertest.Profile.Profile_Activity;
@@ -30,6 +31,11 @@ public class TopNavigationViewHelper {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+
+                    case R.id.ic_home:
+                        Intent intent=new Intent(context, HomeActivity.class);
+                        context.startActivity(intent);
+                        break;
                     case R.id.ic_profile:
                         Intent intent2 = new Intent(context, Profile_Activity.class);
                         context.startActivity(intent2);

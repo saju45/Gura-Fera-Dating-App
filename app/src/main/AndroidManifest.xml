@@ -10,7 +10,13 @@
         android:theme="@style/Theme.TinderTest"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".RequestActivity"
+            android:name=".Home.PostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Friends.RequestActivity"
             android:exported="false" />
         <activity
             android:name=".Chat.MessageActivity"
