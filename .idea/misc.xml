@@ -3,25 +3,46 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/backgraoud_night.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_left.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background_right.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/connecting_gradient.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/custom_seekbar_progress.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/edit_text_focused_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_btn.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/activity_btn_dislike.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_connecting.xml" value="0.109375" />
+        <entry key="app/src/main/res/layout/activity_connection.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.1962962962962963" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login2.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/activity_matched.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_matches.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_profile_checkin_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register_age.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_request.xml" value="0.15833333333333333" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.212" />
         <entry key="app/src/main/res/layout/activity_simple.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/item.xml" value="0.19202898550724637" />
-        <entry key="app/src/main/res/layout/layout_simple_circle.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/chat_item_left.xml" value="0.16" />
+        <entry key="app/src/main/res/layout/chat_item_right.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.1962962962962963" />
+        <entry key="app/src/main/res/layout/item_matches.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_profile.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/layout_request.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_simple_circle.xml" value="0.14" />
         <entry key="app/src/main/res/layout/layout_top_navigation_back.xml" value="0.25" />
         <entry key="app/src/main/res/layout/layout_top_navigation_view.xml" value="0.14887640449438203" />
-        <entry key="app/src/main/res/menu/main.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/second_layout.xml" value="0.15" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.16" />
+        <entry key="app/src/main/res/menu/chat_menu.xml" value="0.14" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.13" />
+        <entry key="app/src/main/res/menu/top_navigation_toolbar.xml" value="0.1" />
       </map>
     </option>
   </component>

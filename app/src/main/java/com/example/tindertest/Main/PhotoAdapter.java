@@ -18,7 +18,8 @@ import com.example.tindertest.R;
 import java.util.List;
 
 public class PhotoAdapter extends ArrayAdapter<Cards> {
-    Context mContext;
+
+   Context mContext;
 
 
     public PhotoAdapter(@NonNull Context context, int resource, @NonNull List<Cards> objects) {

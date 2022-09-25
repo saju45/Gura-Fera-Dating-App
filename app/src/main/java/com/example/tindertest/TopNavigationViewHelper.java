@@ -7,7 +7,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.example.tindertest.Chat.ChatActivity;
 import com.example.tindertest.Main.MainActivity;
+import com.example.tindertest.Matches.Matched_Activity;
 import com.example.tindertest.Profile.Profile_Activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

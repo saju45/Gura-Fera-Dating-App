@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TinderTest</string>
+    <string name="app_name">Gura Fera</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -28,7 +28,7 @@
         <item>@drawable/img3</item>
         <item>@drawable/img4</item>
     </integer-array>
-    <string name="title_activity_splash_screen">FullscreenActivity</string>
+    <string name="title_activity_splash_screen">GF Finder</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 

@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,13 +23,13 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.tindertest.Matched_Activity;
 import com.example.tindertest.NotificationHelper;
 import com.example.tindertest.R;
 import com.example.tindertest.TopNavigationViewHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,7 +39,9 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends Activity {
@@ -55,11 +56,11 @@ public class MainActivity extends Activity {
     private Cards cards_data[];
    private PhotoAdapter arrayAdapter;
 
-   DatabaseReference reference;
+   DatabaseReference reference,requestRef,friendRef;
+   DatabaseReference usersDb;
    FirebaseAuth firebaseAuth;
-   String userId;
-
-
+   String currentUId,currentStatus="nothing_happen";
+   String username,profileUrl;
 
     View layoutParse;
     ImageView profile,amin1,amin2,anim3;
@@ -71,8 +72,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth=FirebaseAuth.getInstance();
-        userId=firebaseAuth.getCurrentUser().getUid();
-        reference=FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        currentUId=firebaseAuth.getCurrentUser().getUid();
+        usersDb=FirebaseDatabase.getInstance().getReference().child("users");
+        reference=FirebaseDatabase.getInstance().getReference().child("users").child(currentUId);
+        requestRef=FirebaseDatabase.getInstance().getReference().child("Requests");
+        friendRef=FirebaseDatabase.getInstance().getReference().child("Friends");
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -101,7 +105,7 @@ public class MainActivity extends Activity {
         handlerImg=new Handler();
 
      //   Glide.with(getApplicationContext()).load(R.drawable.user1).apply(new RequestOptions().circleCrop()).into(profile);
-        starTask();
+       // starTask();
 
 
         cardFrame = findViewById(R.id.card_frame);
@@ -112,9 +116,9 @@ public class MainActivity extends Activity {
 
         setupTopNavigationView();
 
-
         rowItems = new ArrayList<Cards>();
-        Cards cards = new Cards("1", "Swati Tripathy", 21, "https://im.idiva.com/author/2018/Jul/shivani_chhabra-_author_s_profile.jpg", "Simple and beautiful Girl", "Acting", 200);
+
+      /*  Cards cards = new Cards("1", "Swati Tripathy", 21, "https://im.idiva.com/author/2018/Jul/shivani_chhabra-_author_s_profile.jpg", "Simple and beautiful Girl", "Acting", 200);
         rowItems.add(cards);
         cards = new Cards("2", "Ananaya Pandy", 20, "https://i0.wp.com/profilepicturesdp.com/wp-content/uploads/2018/06/beautiful-indian-girl-image-for-profile-picture-8.jpg", "cool Minded Girl", "Dancing", 800);
         rowItems.add(cards);
@@ -128,11 +132,8 @@ public class MainActivity extends Activity {
         rowItems.add(cards);
         cards = new Cards("7", "Sudeshna Roy", 19, "https://talenthouse-res.cloudinary.com/image/upload/c_fill,f_auto,h_640,w_640/v1411380245/user-415406/submissions/hhb27pgtlp9akxjqlr5w.jpg", "Papa's Pari", "Art", 5000);
         rowItems.add(cards);
+*/
 
-        arrayAdapter = new PhotoAdapter(this, R.layout.item, rowItems);
-
-        checkRowItem();
-        updateSwipeCard();
     }
 
     private void checkRowItem() {
@@ -193,6 +194,7 @@ public class MainActivity extends Activity {
             @Override
             public void onLeftCardExit(Object dataObject) {
                 Cards obj = (Cards) dataObject;
+                Toast.makeText(mContext, "Left", Toast.LENGTH_SHORT).show();
                 checkRowItem();
             }
 
@@ -201,6 +203,13 @@ public class MainActivity extends Activity {
                 Cards obj = (Cards) dataObject;
 
                 //check matches
+                String uid = obj.getUserId();
+                username=obj.getName();
+                profileUrl=obj.getProfileImageUrl();
+                friendRequest(uid);
+             //   usersDb.child(uid).child("connections").child("yeps").child(currentUId).setValue(true);
+               // isConnectionMatch(uid);
+                Toast.makeText(mContext, "Right", Toast.LENGTH_SHORT).show();
                 checkRowItem();
 
             }
@@ -269,7 +278,6 @@ public class MainActivity extends Activity {
             startActivity(btnClick);
         }
     }
-
 
     /**
      * setup top tool bar
@@ -340,4 +348,193 @@ public class MainActivity extends Activity {
     };
 
 
+
+    @Override
+    protected void onStart(){
+        FirebaseDatabase.getInstance().getReference().child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                if (snapshot.exists()){
+                    rowItems.clear();
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                        Cards cards=dataSnapshot.getValue(Cards.class);
+                        rowItems.add(cards);
+                    }
+                    if (rowItems.size()>=0){
+
+                        arrayAdapter = new PhotoAdapter(MainActivity.this, R.layout.item, rowItems);
+                        checkRowItem();
+                        updateSwipeCard();
+                    }
+
+                }arrayAdapter.notifyDataSetChanged();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        super.onStart();
+
+
+    }
+
+    private void isConnectionMatch(final String userId) {
+        DatabaseReference currentUserConnectionsDb = usersDb.child(currentUId).child("connections").child("yeps").child(userId);
+/*
+        usersDb.child(currentUId).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists())
+                   sendMessageText = dataSnapshot.getValue().toString();
+                else
+                   sendMessageText = "";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+*/
+        if(!currentUId.equals(userId)){
+            currentUserConnectionsDb.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        Toast.makeText(MainActivity.this, "" +
+                                "New Connection", Toast.LENGTH_LONG).show();
+
+                        String key = FirebaseDatabase.getInstance().getReference().child("Chat").push().getKey();
+                        Map mapLastTimeStamp = new HashMap<>();
+                        long now  = System.currentTimeMillis();
+                        String timeStamp = Long.toString(now);
+                        mapLastTimeStamp.put("lastTimeStamp",timeStamp);
+
+                        usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).child("ChatId").setValue(key);
+                        usersDb.child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUId).updateChildren(mapLastTimeStamp);
+
+                        usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).child("ChatId").setValue(key);
+                        usersDb.child(currentUId).child("connections").child("matches").child(dataSnapshot.getKey()).updateChildren(mapLastTimeStamp);
+
+                  //      notification = " ";
+
+                        DatabaseReference notificationID = FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("notificationKey");
+                        notificationID.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot snapshot) {
+                                if(snapshot.exists()) {
+                                  //  notification = snapshot.getValue().toString();
+                                 //   Log.d("sendChat", notification);
+                                 //   new SendNotification("You have a new match!", "", notification, null, null );
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+
+                    }else {
+                        Toast.makeText(mContext, "No value found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+
+            });
+        }
+    }
+
+    public void friendRequest(String uId){
+
+
+        if (currentStatus.equals("nothing_happen"))
+        {
+
+            HashMap<String,Object> hashMap=new HashMap<>();
+            hashMap.put("status","pending");
+            hashMap.put("name",username);
+            hashMap.put("profile",profileUrl);
+
+            requestRef.child(currentUId).child(uId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(mContext, "You Send Friend Request", Toast.LENGTH_SHORT).show();
+
+                        currentStatus="I_send_pending";
+                    }else {
+                        Toast.makeText(mContext, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
+
+        if (currentStatus.equals("I_send_pending")|| currentStatus.equals("I_send_decline")){
+
+            requestRef.child(currentUId).child(uId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                    if (task.isSuccessful()){
+                        Toast.makeText(mContext, "Cancel Friend Request", Toast.LENGTH_SHORT).show();
+                        currentStatus="nothing_happen";
+                    }else {
+                        Toast.makeText(mContext, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        if (currentStatus.equals("he_send_pending")){
+            requestRef.child(currentUId).child(uId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    
+                    if (task.isSuccessful()){
+
+                        HashMap<String,Object> hashMap=new HashMap<>();
+                        hashMap.put("status","friend");
+                        hashMap.put("username",username);
+                        hashMap.put("profileUrl",profileUrl);
+
+                        friendRef.child(currentUId).child(uId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                                if (task.isSuccessful()){
+                                    friendRef.child(uId).child(currentUId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(MainActivity.this, "Added friend", Toast.LENGTH_SHORT).show();
+                                            currentStatus="friend";
+                                        }
+                                    });
+
+                           }else {
+                                    Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        });
+
+                    }else {
+                        Toast.makeText(mContext, ""+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+    }
 }

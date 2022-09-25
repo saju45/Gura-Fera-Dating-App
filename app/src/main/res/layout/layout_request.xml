@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/requestImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="50dp"
+        android:src="@drawable/programmer"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/requestName"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Shanawaj hossain"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toTopOf="@id/requestImg"
+        app:layout_constraintStart_toEndOf="@id/requestImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="16sp"
+        android:text="last message"
+        android:layout_marginStart="@dimen/_10dp"
+        app:layout_constraintTop_toBottomOf="@id/requestName"
+        app:layout_constraintStart_toEndOf="@id/requestImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/confirm_button"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="@dimen/_5dp"
+        android:paddingBottom="5dp"
+        android:background="@color/blue_btn_bg_color"
+        android:text="Confirm"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:visibility="gone"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="@dimen/_5dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/delete_btn"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="#E91E63"
+        android:text="Delete"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/confirm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

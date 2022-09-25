@@ -12,12 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.quintus.labs.datingapp.R;
 
-/**
- * DatingApp
- * https://github.com/quintuslabs/DatingApp
- * Created on 25-sept-2018.
- * Created by : Santosh Kumar Dash:- http://santoshdash.epizy.com
- */
+
 public class ProfileCheckinMain extends AppCompatActivity {
 
     private Context mContext;
@@ -73,21 +68,21 @@ public class ProfileCheckinMain extends AppCompatActivity {
 
     public void DislikeBtn(View v) {
 
-            Intent btnClick = new Intent(mContext, BtnDislikeActivity.class);
+            Intent btnClick = new Intent(mContext,BtnDislikeActivity.class);
             btnClick.putExtra("url", profileImageUrl);
             startActivity(btnClick);
 
     }
 
     public void LikeBtn(View v) {
-            Intent btnClick = new Intent(mContext, BtnLikeActivity.class);
+            Intent btnClick = new Intent(mContext,BtnLikeActivity.class);
             btnClick.putExtra("url", profileImageUrl);
             startActivity(btnClick);
 
     }
 
     public void onCloseClicked(View view) {
-        Intent btnClick = new Intent(mContext, MainActivity.class);
+        Intent btnClick = new Intent(mContext,MainActivity.class);
         btnClick.putExtra("url", profileImageUrl);
         startActivity(btnClick);
     }

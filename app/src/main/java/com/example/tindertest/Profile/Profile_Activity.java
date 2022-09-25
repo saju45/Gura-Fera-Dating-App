@@ -2,6 +2,7 @@ package com.example.tindertest.Profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -64,6 +65,7 @@ public class Profile_Activity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         userId=firebaseAuth.getCurrentUser().getUid();
         reference= FirebaseDatabase.getInstance().getReference().child("users").child(userId);
+        profile=findViewById(R.id.profile);
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,6 +73,8 @@ public class Profile_Activity extends AppCompatActivity {
 
                 if (snapshot.exists()){
 
+                    Cards cards=snapshot.getValue(Cards.class);
+                    Glide.with(getApplicationContext()).load(cards.getProfileImageUrl()).into(profile);
                 }
             }
 
@@ -95,7 +99,7 @@ public class Profile_Activity extends AppCompatActivity {
 
                     if (snapshot.child("profileImageUrl")!=null){
 
-                        Glide.with(getApplicationContext()).load(snapshot.child("profileImageUrl").getValue()).apply(new RequestOptions().circleCrop()).into(profile);
+                       // Glide.with(getApplicationContext()).load(snapshot.child("profileImageUrl").getValue()).into(profile);
 
                     }
 
@@ -112,14 +116,14 @@ public class Profile_Activity extends AppCompatActivity {
         });
 
 
-        layoutParse=findViewById(R.id.layout1);
-        profile=findViewById(R.id.profileImg);
+       // layoutParse=findViewById(R.id.layout1);
+       // profile=findViewById(R.id.profileImg);
         amin1=findViewById(R.id.profileAmin1);
         anim3=findViewById(R.id.prfileAmin3);
         amin2=findViewById(R.id.prfileAmin2);
         handlerImg=new Handler();
 
-      Glide.with(getApplicationContext()).load(R.drawable.user1).apply(new RequestOptions().circleCrop()).into(profile);
+     // Glide.with(getApplicationContext()).load(R.drawable.user1).apply(new RequestOptions().circleCrop()).into(profile);
         //starAnim();
 
 
@@ -136,7 +140,7 @@ public class Profile_Activity extends AppCompatActivity {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Setting your profile", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Profile_Activity.this, SettingsActivity.class));
             }
         });
 

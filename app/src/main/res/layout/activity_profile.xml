@@ -33,22 +33,34 @@
                 android:background="@drawable/circle_background"
                 >
 
-                <include
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieAnimationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/ripple" />
+
+     <!--           <include
                     android:id="@+id/layout1"
-                    layout="@layout/layout_simple_circle"/>
-              <!--  <de.hdodenhof.circleimageview.CircleImageView
+                    layout="@layout/layout_simple_circle"/>-->
+
+                <de.hdodenhof.circleimageview.CircleImageView
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/circle_profile_image"
-                    android:layout_width="151dp"
-                    android:layout_height="161dp"
+                    android:id="@+id/profile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_centerInParent="true"
-                    android:layout_marginTop="59dp"
                     android:src="@drawable/user1"
                     app:civ_border_color="@color/transparentPink"
-                    app:civ_border_width="2dp" />-->
+                    app:civ_border_width="2dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
